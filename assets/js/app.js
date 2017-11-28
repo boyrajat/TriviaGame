@@ -81,6 +81,8 @@ $(document).ready(function() {
 		
 		displayQuestion();
 
+		//setTimeout(displayQuestion, 2000);
+
 	function newTimer() {
 		 var i = 11;
 			function timer() {
@@ -109,7 +111,11 @@ $(document).ready(function() {
        			y++;
        			
 			clearInterval(myVar);
-			displayQuestion();
+			$("#timeRem").text("");
+			$("#question").text("");
+			
+			setTimeout(displayQuestion, 2000);
+			//displayQuestion();
 		}
    
        	} 
@@ -151,6 +157,8 @@ $(document).ready(function() {
 			if (ansClick === questions[y].corrAns) {
 			alert("You are right - Correct answer - " + questions[y].corrAns);
 			$("li").remove();
+			$("#timeRem").text("");
+			$("#question").text("");
 			correctAns++;
 			if (y === 9) {
        				reset();
@@ -161,12 +169,17 @@ $(document).ready(function() {
 
 
 			clearInterval(myVar);
-			displayQuestion();
+
+			
+			setTimeout(displayQuestion, 2000);
+			//displayQuestion();
 			}//newTimer();
 
 			} else if (ansClick != questions[y].corrAns) {
 			alert("Wrong Anser - Correct answer is - " + questions[y].corrAns);
 			$("li").remove();
+			$("#timeRem").text("");
+			$("#question").text("");
 			wrongAns++;
 			if (y === 9) {
        				reset();
@@ -176,7 +189,10 @@ $(document).ready(function() {
        			y++;
 
 			clearInterval(myVar);
-			displayQuestion();
+
+
+			setTimeout(displayQuestion, 2000);
+			//displayQuestion();
 			}
 		}
 		});
