@@ -4,6 +4,9 @@
 	<title>Trivia Game 2017</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="assets/cs/style.css">
 	<script
 	  src="https://code.jquery.com/jquery-3.2.1.min.js"
@@ -13,6 +16,7 @@
 	
 </head>
 <body>
+	
 	<!-- header -->
 	<div id="head" class="row">
 		<div class="col-md-2"></div>
@@ -24,7 +28,14 @@
 	</div>
 	
 
-	
+	<div id="qprog" class="container text-center">
+  <h2>Quiz Progress</h2>
+   	<div class="progress">
+    <div id="quizprog" class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+      
+    </div>
+  </div>
+</div>
 	
 
 	<!-- Start Button -->
@@ -43,9 +54,12 @@
 	<!-- Countdown timer -->
 	<div class="row">
 		<div class="col-md-4">
+			<audio id="right" src="assets/audio/right.mp3"></audio>
+			<audio id="wrong" src="assets/audio/wrong.mp3"></audio>
 			<audio id="open" src="assets/audio/open.mp3"></audio>
 			<audio id="clock" src="assets/audio/clock.mp3"></audio>
 			<audio id="end" src="assets/audio/end.mp3"></audio>
+
 		</div>
 		<div class="col-md-4 text-center">
 			<h3 id="timeRem"></h3>
@@ -67,6 +81,10 @@
 		</div>
 		<div class="col-md-3"></div>
 	</div>
+
+
+
+
 
 
 

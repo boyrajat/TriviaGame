@@ -1,6 +1,7 @@
 
 $(document).ready(function() { 
 	$("#open").get(0).play();
+	$("#qprog").hide();
 	
 	
 	var q1 = {
@@ -64,6 +65,8 @@ $(document).ready(function() {
 	
 	$("#start").on("click", function() {
 
+
+
 		$("#open").get(0).pause();
 		clearInterval(myVar);
 		$("#clock").get(0).pause();
@@ -77,6 +80,7 @@ $(document).ready(function() {
 		var myVar = 0;
 		$("#startimg").attr("src","assets/img/ques.gif");
 		$("#triviaImg").remove();
+		$("#qprog").show();
 		$("#info").hide();
 		
 		displayQuestion();
@@ -98,19 +102,24 @@ $(document).ready(function() {
        			console.log(j + i);
        			$("#timeRem").text("Seconds Remaining " + j + i);
       		} else {
-       		
+       		$("#clock").get(0).pause();
        			console.log("Time Over");
-       			$("#timeRem").text("Time Over");
+       			tempAlert("TIME OVER",2000);
+
+       			//$("#timeRem").text("Time Over");
        			unAnswered++;
        		 
        			if (y === 9 ) {
-       				reset();
+       				$("#question").text("");
+					$("ul").empty();
+       				setTimeout(reset,2000);
        				clearInterval(myVar);
 
        			} else {
        			y++;
        			
 			clearInterval(myVar);
+			$("ul").empty();
 			$("#timeRem").text("");
 			$("#question").text("");
 			
@@ -131,9 +140,14 @@ $(document).ready(function() {
 		
 		
 	$("ul").empty();
-	$("timeRem").empty();
+	$("#timeRem").empty();
+
 	//newTimer();
 	$("#question").text(questions[y].quest);
+	$("#quizprog").attr("aria-valuenow", ((y+1) * 10));
+	$("#quizprog").width((y+1) * 10 + '%');
+	$("#quizprog").html(((y+1)* 10) + '%');
+
 	for (k=0;k<questions[y].possAns.length;k++) {
 		console.log(questions[y].possAns[k]);
 		$("ul").append("<li>"+"<button>" + questions[y].possAns[k] + "</button>"+"</li><br>");
@@ -155,13 +169,22 @@ $(document).ready(function() {
 
 	
 			if (ansClick === questions[y].corrAns) {
-			alert("You are right - Correct answer - " + questions[y].corrAns);
+			//$("<div title='YAY'>YOU ARE RIGHT - Correct answer - questions[y].corrAns </div>").dialog();
+			rightAnswer();
+			//setTimeout(function() {
+    //alert("YOU ARE RIGHT - Correct answer - " + questions[y].corrAns);
+//}, 0);
+			
+			tempAlert("YOU ARE RIGHT - Correct answer - " + questions[y].corrAns,2000);
+
+
+			//alert("YOU ARE RIGHT - Correct answer - " + questions[y].corrAns);
 			$("li").remove();
 			$("#timeRem").text("");
 			$("#question").text("");
 			correctAns++;
 			if (y === 9) {
-       				reset();
+       				setTimeout(reset,2000);
        				clearInterval(myVar);
        				
        			} else {
@@ -176,13 +199,18 @@ $(document).ready(function() {
 			}//newTimer();
 
 			} else if (ansClick != questions[y].corrAns) {
-			alert("Wrong Anser - Correct answer is - " + questions[y].corrAns);
+			wrongAnswer();
+			//
+			tempAlert("Wrong Answer - Correct answer is - " + questions[y].corrAns,2000);
+
+
+			//alert("Wrong Answer - Correct answer is - " + questions[y].corrAns);
 			$("li").remove();
 			$("#timeRem").text("");
 			$("#question").text("");
 			wrongAns++;
 			if (y === 9) {
-       				reset();
+       				setTimeout(reset,2000);
        				clearInterval(myVar);
        				
        			} else {
@@ -198,7 +226,23 @@ $(document).ready(function() {
 		});
 	};
 
+function rightAnswer() {
+	$("#right").get(0).play();
+}
 
+function wrongAnswer() {
+	$("#wrong").get(0).play();
+}
+
+function tempAlert(msg,duration) {
+ 			var el = document.createElement("div");
+ 			el.setAttribute("style","position:absolute;top:50%;left:0%;width:100%;font-size:24px;color:white;text-align:center");
+ 			el.innerHTML = msg;
+			setTimeout(function(){
+  			el.parentNode.removeChild(el);
+ 			},duration);
+ 			document.body.appendChild(el);
+			}
 	
 
 function reset() {
